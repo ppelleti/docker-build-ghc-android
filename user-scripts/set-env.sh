@@ -15,16 +15,16 @@ BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$BASEDIR"
 
 # Basic parameters
-NDK_RELEASE=${NDK_RELEASE:-r9b}
-NDK_MD5=d7f783deaeea6b60cb515d9427c01c2e
-NDK_PLATFORM=${NDK_PLATFORM:-android-14}
+NDK_RELEASE=${NDK_RELEASE:-r13}
+NDK_MD5=75a0385fec4a2b323107bb77121c4f57
+NDK_PLATFORM=${NDK_PLATFORM:-android-21}
 
 if [ "x$1" == "x--x86" ] ; then
-    NDK_TOOLCHAIN=${NDK_TOOLCHAIN:-x86-4.8}
+    NDK_TOOLCHAIN=${NDK_TOOLCHAIN:-x86-4.9}
     NDK_TARGET=${NDK_TARGET:-i686-linux-android}
     ARCH_OPTS=""
 else
-    NDK_TOOLCHAIN=${NDK_TOOLCHAIN:-arm-linux-androideabi-4.8}
+    NDK_TOOLCHAIN=${NDK_TOOLCHAIN:-arm-linux-androideabi-4.9}
     NDK_TARGET=${NDK_TARGET:-arm-linux-androideabi}
     ARCH_OPTS="-fllvm"
 fi
@@ -42,8 +42,8 @@ GHC_PREFIX="$NDK"
 GHC_SRC="$NDK_ADDON_SRC/ghc"
 
 # GHC tarball
-GHC_RELEASE=7.8.3
-GHC_MD5=5e34b2a29564596c9ed83fb8667b47d4
+GHC_RELEASE=8.0.1
+GHC_MD5=c185b8a1f3e67e43533ec590b751c2ff
 
 NCURSES_RELEASE=5.9
 NCURSES_MD5=8cb9c412e5f2d96bc6f459aa8c6282a1
@@ -86,7 +86,7 @@ function apply_patches() {
 export PATH="$NDK/bin":$PATH
 
 # Download and configure the Android NDK toolchain
-NDK_TAR_FILE=android-ndk-${NDK_RELEASE}-linux-x86.tar.bz2
+NDK_TAR_FILE=android-ndk-${NDK_RELEASE}-linux-x86_64.zip
 NDK_TAR_PATH="${TARDIR}/${NDK_TAR_FILE}"
 NDK_PATH="$HOME/android-ndk-$NDK_RELEASE"
 

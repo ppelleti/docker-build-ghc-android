@@ -1,16 +1,11 @@
-FROM tcm1911/wheezy-i386
+FROM ubuntu:16.04
 MAINTAINER sean.seefried@gmail.com
 
-#
-# I live in Australia so change the mirror to one more appropriate
-# to where you live.
-#
-run echo "deb http://ftp.au.debian.org/debian wheezy main" > /etc/apt/sources.list
-run echo "deb-src http://ftp.au.debian.org/debian wheezy main" >> /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y install build-essential ghc git libncurses5-dev cabal-install \
-  llvm-3.0 ca-certificates curl file m4 autoconf zlib1g-dev \
-  libgnutls-dev libxml2-dev libgsasl7-dev pkg-config python c2hs
+  llvm-3.7-dev ca-certificates curl file m4 autoconf zlib1g-dev \
+  libxml2-dev libgsasl7-dev pkg-config python c2hs \
+  wget unzip
 WORKDIR /root
 ENV TERM xterm
 
@@ -31,11 +26,7 @@ WORKDIR /home/androidbuilder
 # Set the working directory
 ENV BASE /home/androidbuilder/ghc-build
 
-# FIXME: Move the adding of the patches until later in the Docker build,
-# just before GHC is built
-RUN mkdir -p $BASE/patches
-ADD patches/* $BASE/patches/
-
+RUN mkdir -p $BASE
 ADD user-scripts/set-env.sh $BASE/
 WORKDIR $BASE
 
@@ -99,11 +90,8 @@ RUN ./build-libidn.sh
 ADD user-scripts/build-libxml2.sh $BASE/
 RUN ./build-libxml2.sh
 
-ADD user-scripts/build-nettle.sh $BASE/
-RUN ./build-nettle.sh
-
-ADD user-scripts/build-gnutls26.sh $BASE/
-RUN ./build-gnutls26.sh
+RUN mkdir -p $BASE/patches
+ADD patches/* $BASE/patches/
 
 #
 # At last we are ready to build GHC. First we build it for the host

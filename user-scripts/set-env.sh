@@ -7,7 +7,7 @@
 #
 
 [ -e /etc/makepkg.conf ] && source /etc/makepkg.conf
-MAKEFLAGS=${MAKEFLAGS:--j9}
+MAKEFLAGS=${MAKEFLAGS:--j2}
 
 # Basic configuration
 GHCHOME=$HOME/.ghc

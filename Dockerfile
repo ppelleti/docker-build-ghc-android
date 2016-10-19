@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER sean.seefried@gmail.com
+MAINTAINER code@funwithsoftware.org
 
 RUN apt-get update
 RUN apt-get -y install build-essential ghc git libncurses5-dev cabal-install \

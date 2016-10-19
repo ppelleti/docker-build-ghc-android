@@ -1,3 +1,18 @@
+This is an updated version of [sseefried][1]'s [original Dockerfile][2].
+I ([ppelleti][3]) have made the following changes:
+
+* build a GHC 8.0.1 cross-compiler instead of 7.8.3
+* use Android NDK r13 instead of r9b
+* image is based on Ubuntu 16.04 instead of Debian Wheezy (this was
+  necessary to get a new enough system GHC to bootstrap GHC 8.0.1)
+* removed build of libnettle and GnuTLS (not sure why they were there)
+
+Original README follows...
+
+[1]: https://github.com/sseefried
+[2]: https://github.com/sseefried/docker-build-ghc-android
+[3]: https://github.com/ppelleti
+
 #docker-build-ghc-android
 
 This package contains a Dockerfile and associated scripts to build a
